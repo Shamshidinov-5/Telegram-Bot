@@ -1,0 +1,27 @@
+import sqlite3
+
+# Ma'lumotlar bazasi faylini ochamiz
+db = sqlite3.connect('user.db')  # Bu yerda 'users.db' sizning fayl nomingiz
+
+# Kursori yaratamiz
+cursor = connection.cursor()
+
+# Foydalanuvchilar uchun jadval yaratamiz
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS user (
+    user_id INTEGER PRIMARY KEY
+)
+''')
+
+# O'zgarishlarni saqlaymiz
+connection.commit()
+
+# Ba'zi foydalanuvchilar qo'shamiz (agar kerak bo'lsa)
+cursor.execute("INSERT OR IGNORE INTO user (user_id) VALUES (1)")
+cursor.execute("INSERT OR IGNORE INTO user (user_id) VALUES (2)")
+
+# O'zgarishlarni saqlaymiz
+connection.commit()
+
+# Ma'lumotlar bazasini yopamiz
+connection.close()
